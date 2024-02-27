@@ -7,7 +7,7 @@ namespace OnlineShopApp.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         public string Login { get; set; } = "";
 

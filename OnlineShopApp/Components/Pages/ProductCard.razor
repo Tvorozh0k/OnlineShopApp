@@ -1,0 +1,39 @@
+﻿@using OnlineShopApp.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+<body>
+    <div class="col-md-3">
+        <div class="card border-1 m-2 mb-2">
+            <div class="card-header text-center">
+                <img class="card-img-top" src=@Product.Image style="width:300px; height:200px" />
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="text-primary">@Product.ProductName</span>&nbsp; &nbsp;
+                    <br />
+                    <span class="text-secondary text-muted fs-6">@Product.Description</span><br>
+                    <span class="text-primary text-center" style="font-size:16px;"><i>@Product.Price руб.</i></span>
+
+                    <h6 class="text-muted">В наличии: @Product.StockQuantity шт.</h6>
+                </p>
+
+            </div>
+            <div class="card-footer bg-white">
+                <button class="btn btn-outline-danger btn-sm">
+                    <i class="oi oi-cart fs-5"></i>
+                    В корзину
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+    [Parameter]
+    public Product Product { get; set; } = new Product();
+}

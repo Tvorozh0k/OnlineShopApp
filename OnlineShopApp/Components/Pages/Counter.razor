@@ -1,7 +1,10 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
 
-<PageTitle>Counter</PageTitle>
+@using OnlineShopApp.Models
+@inject OnlineShopApp.Services.ProductService productService
+
+<PageTitle>Counter + Products</PageTitle>
 
 <h1>Counter</h1>
 
@@ -9,11 +12,56 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>ProductName</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>StockQuantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in products)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.ProductName</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.StockQuantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    @for (int i = 0; i < 10; ++i)
+    {
+        <ProductCard Product=@products[0] />
+    }
+</div>
+
+
 @code {
     private int currentCount = 0;
+
+    List<Product> products = new List<Product>();
+
 
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetProducts();
+    }
+
+    private void GetProducts()
+    {
+        products = productService.GetAll();
     }
 }
